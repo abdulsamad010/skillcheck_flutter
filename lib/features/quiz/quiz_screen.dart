@@ -48,19 +48,9 @@ class _QuizScreenState extends State<QuizScreen> {
               return;
             }
 
-            if(quizzes[widget.name][currentQuestion]['answer']==quizzes[widget.name][currentQuestion]['options'][selectedIndex]){
-              marks=marks+2;
-            }
-            else{
-              marks=marks-2;
-            }
 
-            if(currentQuestion<quizzes[widget.name].length-1) {
-              currentQuestion++;
-              setState(() {});
-              selectedIndex=null;
-              print(marks);
-            }
+
+
 
             },
           child: Text("Next"),
