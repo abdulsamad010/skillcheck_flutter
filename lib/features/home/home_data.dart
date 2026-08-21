@@ -3,5 +3,4 @@ final skillList=[
   "Computer Skills",
   "Digital & Cybersecurity Skills",
   "Problem Solving Skills",
-  "General Knowledge Skills"
 ];
