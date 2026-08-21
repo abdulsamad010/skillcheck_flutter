@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skillcheck_flutter/features/profile/profile_screen.dart';
 
 import '../../core/widgets/custom_app_Bar.dart';
 import '../skill_category/skill_category.dart';
@@ -50,6 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home",),
+        BottomNavigationBarItem(icon: Icon(Icons.account_circle),label: "Profile")
+      ],
+      onTap: (index){
+        if(index==1){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+        }
+      },
+      ),
+
     );
   }
 }
