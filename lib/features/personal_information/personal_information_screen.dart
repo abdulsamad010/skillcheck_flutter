@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skillcheck_flutter/core/widgets/custom_app_Bar.dart';
 import 'package:skillcheck_flutter/features/home/home_screen.dart';
-import 'package:skillcheck_flutter/features/home/personal_information/personal_bloc.dart';
-import 'package:skillcheck_flutter/features/home/personal_information/personal_event.dart';
+import 'package:skillcheck_flutter/features/personal_information/personal_bloc.dart';
+import 'package:skillcheck_flutter/features/personal_information/personal_event.dart';
 
 class PersonalInformationScreen extends StatefulWidget {
   const PersonalInformationScreen({super.key});
