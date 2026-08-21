@@ -943,7 +943,7 @@ final Map<String, dynamic> quizzes =
       "answer": "10"
     }
   ],
-  "Basic Problem Solving": [
+  "Problem Solving": [
     {
       "question": "A program takes 2 seconds for 1,000 records at a constant rate. Time for 5,000?",
       "options": ["4 seconds", "6 seconds", "10 seconds", "20 seconds"],
