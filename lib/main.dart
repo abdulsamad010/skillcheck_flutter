@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skillcheck_flutter/features/home/home_screen.dart';
+import 'features/personal_information/personal_information_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   colorScheme:  ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
 
-      home: HomeScreen(),
+      home: PersonalInformationScreen(),
     );
   }
 }
