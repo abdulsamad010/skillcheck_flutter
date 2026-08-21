@@ -7,5 +7,5 @@ class QuizState {
   final String answer;
   final List<String> options;
   final int? isPass;
-  QuizState({this.marks=0,this.currentQuestion=0,this.selectedIndex,required this.selectedSkill,this.isEndQuiz=false,this.question='',this.answer='',this.options=const[],this.isPass=null,required this.mainSelectedSkill});
+  QuizState({this.marks=0,this.currentQuestion=0,this.selectedIndex,required this.selectedSkill,this.isEndQuiz=false,this.question='',this.answer='',this.options=const[],this.isPass,required this.mainSelectedSkill});
 }
