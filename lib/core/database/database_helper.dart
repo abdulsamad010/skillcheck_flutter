@@ -49,7 +49,6 @@ class DatabaseHelper{
 
   static Future<void> insertQuiz(String categoryName, String skillName, int marks, int isPass,) async {
     await createDb();
-    await db!.delete('PROFILE');
     await db!.insert(
       'QUIZ',
       {
@@ -73,6 +72,16 @@ class DatabaseHelper{
   static Future<void> deleteProfile() async{
     await createDb();
     await db!.delete('PROFILE');
-    await db!.delete('Quiz');
+    await db!.delete('QUIZ');
+  }
+
+  static Future<List<Map<String,dynamic>>> readProfile() async{
+    await createDb();
+    return await db!.query('PROFILE');
+  }
+
+  static Future<List<Map<String,dynamic>>> readQuiz() async{
+    await createDb();
+    return await db!.query('QUIZ');
   }
 }
