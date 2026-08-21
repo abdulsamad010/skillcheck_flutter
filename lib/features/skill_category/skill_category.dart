@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:skillcheck_flutter/core/widgets/custom_app_Bar.dart';
+import 'package:skillcheck_flutter/features/quiz/quiz_bloc.dart';
+import 'package:skillcheck_flutter/features/quiz/quiz_event.dart';
 import 'package:skillcheck_flutter/features/skill_category/skill_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../quiz/quiz_screen.dart';
 
@@ -24,7 +27,9 @@ class SkillCategory extends StatelessWidget {
                       child:Container(
                         child: InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizScreen(name:skillCategories[skillList[index1]]![index])));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>BlocProvider(
+                                  create:(context)=>QuizBloc(skillCategories[skillList[index1]]![index],skillList[index1])..add(InitializeQuiz()),
+                                  child: QuizScreen())));
                             },
                             child: Text("${skillCategories[skillList[index1]]![index]}")),
                       )

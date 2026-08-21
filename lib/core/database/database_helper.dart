@@ -1,10 +1,9 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+class DatabaseHelper{
+  static Database? db;
 
-class databaseHelper{
-  Database? db;
-
-  Future<void> createDb() async{
+  static Future<void> createDb() async{
 
     if(db!=null){
       return;
@@ -39,7 +38,7 @@ class databaseHelper{
     );
   }
 
-  Future<void> insertProfile(String name,String education,String profession) async{
+  static Future<void> insertProfile(String name,String education,String profession) async{
     await createDb();
     await db!.insert('PROFILE', {
       'NAME':name,
@@ -48,7 +47,7 @@ class databaseHelper{
     });
   }
 
-  Future<void> insertQuiz(String categoryName, String skillName, int marks, int isPass,) async {
+  static Future<void> insertQuiz(String categoryName, String skillName, int marks, int isPass,) async {
     await createDb();
     await db!.delete('PROFILE');
     await db!.insert(
@@ -62,7 +61,7 @@ class databaseHelper{
     );
   }
 
-  Future<void> updateProfile(String name,String education,String profession) async{
+  static Future<void> updateProfile(String name,String education,String profession) async{
     await createDb();
     await db!.update('PROFILE', {
       'NAME':name,
@@ -71,7 +70,7 @@ class databaseHelper{
     });
   }
 
-  Future<void> deleteProfile() async{
+  static Future<void> deleteProfile() async{
     await createDb();
     await db!.delete('PROFILE');
     await db!.delete('Quiz');
