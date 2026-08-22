@@ -37,6 +37,8 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height=MediaQuery.sizeOf(context).height;
+    final width=MediaQuery.sizeOf(context).width;
     return BlocProvider(
       create: (context)=> PersonalBloc(),
       child: Builder(
@@ -45,6 +47,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
             appBar: CustomAppBar(name: "Personal Information"),
 
             body: Container(
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white
               ),
@@ -52,43 +55,86 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 key: formKey,
                 child: SingleChildScrollView(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
+                      Container(
 
+                      height: width*0.3,width: width*0.3,
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurpleAccent,
+                          borderRadius: BorderRadius.circular(200)
+                        ),
+                        child: Icon(Icons.pending_actions,color: Colors.white,size: width*0.2,)),
+
+                      SizedBox(height: height*0.05,),
+
+                      Text("Tell us about yourself",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,)),
+
+                      SizedBox(height: height*0.01,),
+
+                      Text("Please provide your basic information to personalize your experience",style: TextStyle(color: Colors.grey,fontSize: 10,fontWeight: FontWeight.bold,)),
+
+                      SizedBox(height: height*0.05,),
 
                       TextFormField(
                         controller: nameController,
                         validator: validateName,
                         decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(
+                            color: Colors.deepPurple,
+
+                          )),
+                          prefixIcon:  Icon(Icons.person,color: Colors.deepPurple,),
                           label: Text("Enter Name")
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
 
+                      SizedBox(height: height*0.05,),
+
                       TextFormField(
                         controller: educationController,
                         validator: validateEducation,
                         decoration: InputDecoration(
-                            label: Text("Enter Education")
+                            border: OutlineInputBorder(borderSide: BorderSide(
+                              color: Colors.deepPurple,
+
+                            )),
+                            prefixIcon:  Icon(Icons.leaderboard_rounded,color: Colors.deepPurple,),
+                            label: Text("Enter Your Education")
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
+
+                      SizedBox(height: height*0.05,),
 
                       TextFormField(
                         controller: professionController,
                         validator: validateProfession,
                         decoration: InputDecoration(
-                            label: Text("Enter Profession")
+                            border: OutlineInputBorder(borderSide: BorderSide(
+                              color: Colors.deepPurple,
+
+                            )),
+                            prefixIcon:  Icon(Icons.work_history,color: Colors.deepPurple,),
+                            label: Text("Enter your profession")
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
 
-                      ElevatedButton(onPressed: (){
+                      SizedBox(height: height*0.05,),
+
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.deepPurple
+                          ),
+                          onPressed: (){
                         if(formKey.currentState!.validate()){
                           context.read<PersonalBloc>().add(StorePersonalInfo(professionController.text, educationController.text, nameController.text));
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                         }
-                      }, child: Text("Submit & Continue")),
+                      }, child: Text("Submit & Continue",style: TextStyle(color: Colors.white),)),
 
                     ],
                   ),
