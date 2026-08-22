@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'features/personal_information/personal_information_screen.dart';
+import 'features/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   colorScheme:  ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
 
-      home: PersonalInformationScreen(),
+      home:SplashScreen(),
     );
   }
 }

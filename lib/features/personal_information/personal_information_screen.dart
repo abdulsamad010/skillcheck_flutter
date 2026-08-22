@@ -44,47 +44,54 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
           return Scaffold(
             appBar: CustomAppBar(name: "Personal Information"),
 
-            body: SingleChildScrollView(
+            body: Container(
+              decoration: BoxDecoration(
+                color: Colors.white
+              ),
               child: Form(
                 key: formKey,
-                child: Column(
-                  children: [
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
 
-                    TextFormField(
-                      controller: nameController,
-                      validator: validateName,
-                      decoration: InputDecoration(
-                        label: Text("Enter Name")
+
+
+                      TextFormField(
+                        controller: nameController,
+                        validator: validateName,
+                        decoration: InputDecoration(
+                          label: Text("Enter Name")
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
 
-                    TextFormField(
-                      controller: educationController,
-                      validator: validateEducation,
-                      decoration: InputDecoration(
-                          label: Text("Enter Education")
+                      TextFormField(
+                        controller: educationController,
+                        validator: validateEducation,
+                        decoration: InputDecoration(
+                            label: Text("Enter Education")
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
 
-                    TextFormField(
-                      controller: professionController,
-                      validator: validateProfession,
-                      decoration: InputDecoration(
-                          label: Text("Enter Profession")
+                      TextFormField(
+                        controller: professionController,
+                        validator: validateProfession,
+                        decoration: InputDecoration(
+                            label: Text("Enter Profession")
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
 
-                    ElevatedButton(onPressed: (){
-                      if(formKey.currentState!.validate()){
-                        context.read<PersonalBloc>().add(StorePersonalInfo(professionController.text, educationController.text, nameController.text));
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
-                      }
-                    }, child: Text("Submit & Continue")),
+                      ElevatedButton(onPressed: (){
+                        if(formKey.currentState!.validate()){
+                          context.read<PersonalBloc>().add(StorePersonalInfo(professionController.text, educationController.text, nameController.text));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                        }
+                      }, child: Text("Submit & Continue")),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
