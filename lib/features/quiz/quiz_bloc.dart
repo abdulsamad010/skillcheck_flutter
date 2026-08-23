@@ -12,12 +12,13 @@ class QuizBloc extends Bloc<QuizEvent,QuizState>{
     on<InitializeQuiz>((event, emit) {
       emit(
           QuizState(
-              currentQuestion: state.currentQuestion,
+              currentQuestion: 0,
               mainSelectedSkill: state.mainSelectedSkill,
-              marks: state.marks,
-              selectedIndex: state.selectedIndex,
+              isPass: null,
+              marks: 0,
+              selectedIndex: null,
               selectedSkill: state.selectedSkill,
-              isEndQuiz: state.isEndQuiz,
+              isEndQuiz: false,
               question: quizzes[state.selectedSkill][state.currentQuestion]['question'],
             answer: quizzes[state.selectedSkill][state.currentQuestion]['answer'],
             options: quizzes[state.selectedSkill][state.currentQuestion]['options'],
