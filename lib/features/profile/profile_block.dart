@@ -10,16 +10,22 @@ class ProfileBlock extends Bloc<ProfileEvent,ProfileState>{
       final List<Map<String,dynamic>> newProfile= await DatabaseHelper.readProfile();
       final List<Map<String,dynamic>> newQuiz=await DatabaseHelper.readQuiz();
 
-      print(newProfile);
-      print(newQuiz);
-
       if(!newQuiz.isEmpty && !newQuiz.isEmpty) {
+
+        double newTotalScore=0;
+        for(int i=0; i<newQuiz.length; i++){
+          newTotalScore=newTotalScore+newQuiz[i]["score"];
+        }
+
+        final newTotalPercentage=newTotalScore/(newQuiz.length)*10;
+
         emit(
             ProfileState(
                 name: newProfile[0]["NAME"],
                 education: newProfile[0]["EDUCATION"],
                 profession: newProfile[0]["PROFESSION"],
-
+                totalScorePercentage: newTotalPercentage,
+                totalScore: newTotalScore,
                 quiz: newQuiz
             )
         );
