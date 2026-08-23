@@ -14,7 +14,7 @@ class PersonalBloc extends Bloc<PersonalEvent,PersonalState>{
 
       final List<Map<String,dynamic>> newPersonalInfo= await DatabaseHelper.readProfile();
 
-      if(newPersonalInfo!=[]){
+      if(newPersonalInfo.isNotEmpty){
 
       emit(
         PersonalState(name:newPersonalInfo[0]['NAME'], education:newPersonalInfo[0]["EDUCATION"], profession:newPersonalInfo[0]["PROFESSION"])
