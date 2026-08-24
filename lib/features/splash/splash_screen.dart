@@ -17,14 +17,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  void wait() async{
-    await Future.delayed(Duration(seconds: 5));}
-
   @override
   void initState() {
-
-    wait();
-
     super.initState();
   }
 
@@ -36,10 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
         create: (context)=> PersonalBloc()..add(InitializePersonalBloc()),
         child: Builder(
             builder: (context) {
-              return Scaffold(
-                  appBar: CustomAppBar(name: "Personal Information"),
+              return BlocListener<PersonalBloc,PersonalState>(listener: (context,state)async{
 
-                  body: BlocListener<PersonalBloc,PersonalState>(listener: (context,state){
+                    await Future.delayed(Duration(seconds: 5));
+
+                    if (!mounted) return;
 
                     if(state.name!=''){
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
@@ -77,4 +72,4 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                       ),
                     ),
-                  ));}));}}
+                  );}));}}
