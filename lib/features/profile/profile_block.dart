@@ -5,19 +5,23 @@ import 'package:skillcheck_flutter/features/profile/profile_state.dart';
 
 class ProfileBlock extends Bloc<ProfileEvent,ProfileState>{
   ProfileBlock() : super(ProfileState()){
+
     on<InitializeProfile>((event,emit) async{
 
       final List<Map<String,dynamic>> newProfile= await DatabaseHelper.readProfile();
       final List<Map<String,dynamic>> newQuiz=await DatabaseHelper.readQuiz();
 
-      if(!newQuiz.isEmpty && !newQuiz.isEmpty) {
+      if(newQuiz.isNotEmpty && newProfile.isNotEmpty) {
 
         double newTotalScore=0;
         for(int i=0; i<newQuiz.length; i++){
-          newTotalScore=newTotalScore+newQuiz[i]["score"];
+          newTotalScore=newTotalScore+newQuiz[i]["MARKS"];
         }
 
-        final newTotalPercentage=newTotalScore/(newQuiz.length)*10;
+        double newTotalPercentage = newTotalScore / (newQuiz.length * 20);
+        if(newTotalPercentage.isNegative){
+          newTotalPercentage=0;
+        }
 
         emit(
             ProfileState(

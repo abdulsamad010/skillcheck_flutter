@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Text("Category Name : ${state.quiz![index]["CATEGORY_NAME"]}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey),),
                             SizedBox(height: 4,),
 
-                            Text("Marks Obtained: ${state.quiz![index]["Marks"]}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey),),
+                            Text("Marks Obtained: ${state.quiz![index]["MARKS"]}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey),),
                             SizedBox(height: 4,),
 
                             Text("Result: ${state.quiz![index]["IS_PASS"]==1 ? "Pass":"Fail"}",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey),),
