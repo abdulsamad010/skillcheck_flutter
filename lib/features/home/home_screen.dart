@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skillcheck_flutter/features/personal_information/personal_bloc.dart';
+import 'package:skillcheck_flutter/features/personal_information/personal_event.dart';
 import 'package:skillcheck_flutter/features/personal_information/personal_state.dart';
 import 'package:skillcheck_flutter/features/profile/profile_block.dart';
 import 'package:skillcheck_flutter/features/profile/profile_screen.dart';
+import 'package:skillcheck_flutter/features/profile/profile_event.dart';
+import 'package:skillcheck_flutter/features/profile/profile_state.dart';
 
 import '../../core/widgets/custom_app_Bar.dart';
 import '../skill_category/skill_category.dart';
@@ -29,8 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context)=>PersonalBloc()),
-        BlocProvider(create: (context)=>ProfileBlock()),
+        BlocProvider(create: (context)=>PersonalBloc()..add(InitializePersonalBloc())),
+        BlocProvider(create: (context)=>ProfileBlock()..add(InitializeProfile())),
       ],
       child: Builder(
         builder: (context) {
@@ -46,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 
                     SizedBox(height: height*0.02,),
                     Container(
+                      margin: EdgeInsets.all(8),
                       width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.deepPurple,
@@ -61,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text("Hello, ${context.read<PersonalBloc>().state.name}!",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                  BlocBuilder<PersonalBloc,PersonalState>(builder: (context,state)=>Text("Hello, ${state.name}!",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),)),
                 
                                   Text("Test your knowledge. Challenge yourself. Keep improving.",style: TextStyle(color:Colors.white70,fontWeight: FontWeight.bold,fontSize: 15),)
                                 ],
@@ -82,33 +86,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     Text("Your Progress",style: TextStyle(color:Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
 
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey
-                          ,
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      padding: EdgeInsets.all(height*0.05),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                
-                
-                          Row(
-                            children: [
-                              Expanded(child: Text("Quizzes Completed\n ${context.read<ProfileBlock>().state.quiz != null ? context.read<ProfileBlock>().state.quiz!.length : "0"}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                              Text("Total Score\n ${context.read<ProfileBlock>().state.quiz != null ? context.read<ProfileBlock>().state.totalScorePercentage!*100 : "0"}%",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                            ],
-                          ),
-                          SizedBox(height: height*0.01,),
-                          LinearProgressIndicator(
-                            value: context.read<ProfileBlock>().state.totalScore != null ? context.read<ProfileBlock>().state.totalScorePercentage!.clamp(0.0, 1.0) : 0,
-                            minHeight: 15,
-                            borderRadius: BorderRadius.circular(10),
-                            valueColor: AlwaysStoppedAnimation(Colors.deepPurple),
-                
-                          ),
-                        ],
+                    BlocBuilder<ProfileBlock,ProfileState>(
+                        builder:(context,state)=>Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey
+                            ,
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                        padding: EdgeInsets.all(height*0.05),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+
+                            Row(
+                              children: [
+                                Expanded(child: Text("Quizzes Completed\n ${state.quiz != null ? state.quiz!.length : "0"}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                                Text("Total Score\n ${state.quiz != null ? state.totalScorePercentage!*100 : "0"}%",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                              ],
+                            ),
+                            SizedBox(height: height*0.01,),
+                            LinearProgressIndicator(
+                              value: state.totalScore != null ? state.totalScorePercentage!.clamp(0.0, 1.0) : 0,
+                              minHeight: 15,
+                              backgroundColor: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              valueColor: AlwaysStoppedAnimation(Colors.deepPurple),
+
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
