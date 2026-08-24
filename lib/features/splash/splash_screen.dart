@@ -49,30 +49,32 @@ class _SplashScreenState extends State<SplashScreen> {
                     }
 
                   },
-                    child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.deepPurple,
-          gradient: LinearGradient(colors: [Colors.deepPurple,Colors.orangeAccent],begin: AlignmentGeometry.bottomCenter,end: AlignmentGeometry.topCenter)
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+                    child: Scaffold(
+                      body: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                            gradient: LinearGradient(colors: [Colors.deepPurple,Colors.orangeAccent],begin: AlignmentGeometry.bottomCenter,end: AlignmentGeometry.topCenter)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
 
-            Image.asset("assets/logo/app_logo.png",fit: BoxFit.contain,height: height*0.5,width:width*0.5),
-            Text("Test, Learn, Grow",style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-            ),),
+                            Image.asset("assets/logo/app_logo.png",fit: BoxFit.contain,height: height*0.5,width:width*0.5),
+                            Text("Test, Learn, Grow",style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold
+                            ),),
 
-            SizedBox(height: 8,),
+                            SizedBox(height: 8,),
 
-            CircularProgressIndicator(color: Colors.white,),
+                            CircularProgressIndicator(color: Colors.white,),
 
 
-          ],
-        ),
-      ),
-    ));}));}}
+                          ],
+                        ),
+                      ),
+                    ),
+                  ));}));}}

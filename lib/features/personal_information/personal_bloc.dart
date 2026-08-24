@@ -16,7 +16,13 @@ class PersonalBloc extends Bloc<PersonalEvent,PersonalState>{
         emit(
             PersonalState(name:newPersonalInfo[0]['NAME'], education:newPersonalInfo[0]["EDUCATION"], profession:newPersonalInfo[0]["PROFESSION"])
         );
-      }});
+      }
+      else{
+        emit(
+            PersonalState()
+        );
+      }
+    });
 
 
     on<StorePersonalInfo>((event,emit) async{
@@ -27,10 +33,10 @@ class PersonalBloc extends Bloc<PersonalEvent,PersonalState>{
 
       if(newPersonalInfo.isNotEmpty){
 
-      emit(
-        PersonalState(name:newPersonalInfo[0]['NAME'], education:newPersonalInfo[0]["EDUCATION"], profession:newPersonalInfo[0]["PROFESSION"])
-      );
-    }}
+        emit(
+            PersonalState(name:newPersonalInfo[0]['NAME'], education:newPersonalInfo[0]["EDUCATION"], profession:newPersonalInfo[0]["PROFESSION"])
+        );
+      }}
     );  }
 
 }
