@@ -47,14 +47,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
           return Scaffold(
             appBar: CustomAppBar(name: "Personal Information"),
 
-            body: BlocListener<PersonalBloc,PersonalState>(listener: (context,state){
-
-              if(state.name!=''){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
-              }
-
-            },
-            child:Container(
+            body: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white
@@ -149,7 +142,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 ),
               ),
             ),
-          ));
+          );
         }
       ),
     );

@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            appBar: CustomAppBar(name: "Home"),
+            appBar: CustomAppBar(name: "SkillCheck"),
 
             body: Padding(
               padding: const EdgeInsets.fromLTRB(8,8,8,8),
