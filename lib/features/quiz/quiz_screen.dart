@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skillcheck_flutter/core/widgets/custom_app_Bar.dart';
-import 'package:skillcheck_flutter/features/home/home_screen.dart';
 import 'package:skillcheck_flutter/features/quiz/quiz_bloc.dart';
 import 'package:skillcheck_flutter/features/quiz/quiz_end_screen.dart';
 import 'package:skillcheck_flutter/features/quiz/quiz_event.dart';
@@ -25,29 +24,27 @@ class _QuizScreenState extends State<QuizScreen> {
     final height=MediaQuery.sizeOf(context).height;
     final width=MediaQuery.sizeOf(context).width;
 
-    return BlocListener<QuizBloc,QuizState>(listener:(context,state) async{
+    return BlocListener<QuizBloc, QuizState>(
+        listener: (context, state) {
+          if (state.isEndQuiz && state.isPass == null) {
+            context.read<QuizBloc>().add(StoreResults());
+          }
 
-      if (context.read<QuizBloc>().state.isEndQuiz && context.read<QuizBloc>().state.isPass == null) {
-        context.read<QuizBloc>().add(StoreResults());
-      }
-
-      CircularProgressIndicator();
-      await Future.delayed(Duration(
-        seconds: 5
-      ));
-
-      if (context.read<QuizBloc>().state.isPass != null) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>QuizEndScreen()));
-
-
-      }
-
-    },
+          if (state.isPass != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: context.read<QuizBloc>(),
+                  child: QuizEndScreen(),
+                ),
+              ),
+            );
+          }
+        },
 
     child:  Scaffold(
-      appBar: CustomAppBar(
-        name: "Quiz For ${context.read<QuizBloc>().state.selectedSkill}",
-      ),
+      appBar:AppBar(leading: Icon(Icons.question_mark,color: Colors.orangeAccent,),title: Text("Quiz For ${context.read<QuizBloc>().state.selectedSkill}",style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold),),),
       body: SafeArea(
             child: Container(
               padding: EdgeInsets.all(8),
@@ -92,7 +89,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 2,
+                          childAspectRatio: 1.4,
                           crossAxisCount: 2,
                         ),
                         itemCount: state.options.length,
@@ -120,7 +117,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 },
                                 child: Column(
                                   children: [
-                                    Expanded(child: Text("Option ${index + 1}", style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold))),
+                                    Text("Option ${index + 1}", style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold)),
 
                                     Expanded(child: Text("${state.options[index]}", style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),)),
 

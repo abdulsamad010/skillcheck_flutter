@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:skillcheck_flutter/features/profile/profile_event.dart';
 import 'package:skillcheck_flutter/features/quiz/quiz_data.dart';
 import 'package:skillcheck_flutter/features/quiz/quiz_event.dart';
 import 'package:skillcheck_flutter/features/quiz/quiz_state.dart';
