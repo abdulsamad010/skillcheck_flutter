@@ -4,6 +4,7 @@ import 'package:skillcheck_flutter/core/widgets/custom_app_Bar.dart';
 import 'package:skillcheck_flutter/features/home/home_screen.dart';
 import 'package:skillcheck_flutter/features/personal_information/personal_bloc.dart';
 import 'package:skillcheck_flutter/features/personal_information/personal_event.dart';
+import 'package:skillcheck_flutter/features/personal_information/personal_state.dart';
 
 class PersonalInformationScreen extends StatefulWidget {
   const PersonalInformationScreen({super.key});
@@ -40,13 +41,20 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
     final height=MediaQuery.sizeOf(context).height;
     final width=MediaQuery.sizeOf(context).width;
     return BlocProvider(
-      create: (context)=> PersonalBloc(),
+      create: (context)=> PersonalBloc()..add(InitializePersonalBloc()),
       child: Builder(
         builder: (context) {
           return Scaffold(
             appBar: CustomAppBar(name: "Personal Information"),
 
-            body: Container(
+            body: BlocListener<PersonalBloc,PersonalState>(listener: (context,state){
+
+              if(state.name!=''){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+              }
+
+            },
+            child:Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white
@@ -141,7 +149,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 ),
               ),
             ),
-          );
+          ));
         }
       ),
     );

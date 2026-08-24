@@ -7,6 +7,17 @@ class PersonalBloc extends Bloc<PersonalEvent,PersonalState>{
   PersonalBloc() : super(PersonalState()){
 
 
+    on<InitializePersonalBloc>((event,emit) async{
+
+      final List<Map<String,dynamic>> newPersonalInfo= await DatabaseHelper.readProfile();
+
+      if(newPersonalInfo.isNotEmpty){
+
+        emit(
+            PersonalState(name:newPersonalInfo[0]['NAME'], education:newPersonalInfo[0]["EDUCATION"], profession:newPersonalInfo[0]["PROFESSION"])
+        );
+      }});
+
 
     on<StorePersonalInfo>((event,emit) async{
 
